@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eesti digitaalehituse juhtimismudel 2027+ (konsultatsiooniks)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('ubn4-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#0B2545; --ink-2:#4A5B73; --ink-3:#7A889B;
+  --line:#DCE2EA; --soft:#F2F5F9; --navy:#0B2545; --on-navy:#FFFFFF; --amber:#F5A623; --amber-ink:#8A5A00; --amber-soft:#FEF4E1;
+  --font:"Schibsted Grotesk", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:var(--bg);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#081B33; --ink:#EAF0F7; --ink-2:#AEBBCC; --ink-3:#7F90A6;
+    --line:#22395B; --soft:#0E2544; --amber-ink:#F5A623; --amber-soft:#2A2310; --navy:#1B4274; --on-navy:#FFFFFF;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#081B33; --ink:#EAF0F7; --ink-2:#AEBBCC; --ink-3:#7F90A6;
+  --line:#22395B; --soft:#0E2544; --amber-ink:#F5A623; --amber-soft:#2A2310; --navy:#1B4274; --on-navy:#FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:clamp(15px, .55vw + 12px, 19px);line-height:1.5;-webkit-font-smoothing:antialiased;
+  display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr);overflow:hidden}
+a{color:inherit;text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--amber-ink)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* Top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.8rem clamp(1rem,4vw,3.5rem);border-bottom:1px solid var(--line)}
+.top .where{min-width:0;font-size:.82rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .where b{color:var(--ink);font-weight:700}
+.badge{flex:none;display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;
+  background:var(--amber-soft);color:var(--amber-ink);border:1px solid var(--amber);
+  padding:.3rem .75rem;border-radius:999px}
+.badge::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--amber)}
+
+/* Slides */
+main{position:relative;min-height:0}
+.slide{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  padding:clamp(1.5rem,4.5vh,3.5rem) clamp(1rem,5vw,4.5rem) 2rem}
+.slide[hidden]{display:none}
+.inner{max-width:1180px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center}
+.slide.on .inner{animation:in .35s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h1,h2,h3{margin:0;font-weight:750;letter-spacing:-.022em;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(2.1rem, 1.2rem + 3.6vw, 4.4rem);font-weight:800;max-width:17ch}
+h2{font-size:clamp(1.6rem, 1rem + 2.2vw, 3rem);max-width:22ch;margin-bottom:clamp(1.2rem,3.5vh,2.4rem)}
+h3{font-size:1.08rem;font-weight:700;letter-spacing:-.005em;line-height:1.25;margin-bottom:.3rem}
+p{margin:0 0 .8rem;max-width:62ch}
+.lead{font-size:clamp(1.05rem, .9rem + .6vw, 1.4rem);color:var(--ink-2);max-width:48ch;line-height:1.45}
+.muted{color:var(--ink-2)}
+.small{font-size:.85rem;color:var(--ink-3)}
+ul.plain{list-style:none;margin:0;padding:0}
+ul.plain li{padding:.5rem 0;border-bottom:1px solid var(--line)}
+ul.plain li:last-child{border-bottom:0}
+
+.cols{display:grid;gap:clamp(1.2rem,3vw,3rem)}
+.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.split{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:start}
+.split[style*="--l"]{grid-template-columns:minmax(0,var(--l)) minmax(0,1fr)}
+.rule{border-top:3px solid var(--ink);padding-top:.8rem}
+.rule.a{border-top-color:var(--amber)}
+.rule p{font-size:.95rem;color:var(--ink-2);margin:0}
+
+.note{margin-top:clamp(1.2rem,3vh,2rem);padding:.9rem 1.1rem;border-left:4px solid var(--amber);
+  background:var(--amber-soft);max-width:70ch}
+.note p{margin:0;color:var(--ink)}
+.big{font-size:clamp(1.35rem, .9rem + 1.5vw, 2.2rem);font-weight:650;letter-spacing:-.015em;line-height:1.2;max-width:24ch}
+
+/* Signature: the information chain */
+.chain{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;position:relative}
+.chain::before{content:"";position:absolute;left:0;right:0;top:16px;height:4px;background:var(--line)}
+.chain::after{content:"";position:absolute;left:0;top:16px;height:4px;background:var(--amber);width:var(--fill,100%)}
+.chain li{position:relative;padding:3rem .8rem 0 0;z-index:1}
+.chain li::before{content:"";position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;
+  background:var(--bg);border:4px solid var(--ink)}
+.chain li.hit::before{background:var(--amber);border-color:var(--amber)}
+.chain li strong{display:block;font-size:1.2rem;line-height:1.2}
+.chain li span{display:block;font-size:.93rem;color:var(--ink-2);margin-top:.25rem}
+.title-chain{margin-top:clamp(2rem,6vh,4rem)}
+.slide.on .title-chain::after{animation:grow 1.4s .2s cubic-bezier(.3,.7,.2,1) both}
+.slide.on .title-chain li::before{animation:fill .3s both}
+.slide.on .title-chain li:nth-child(1)::before{animation-delay:.25s}
+.slide.on .title-chain li:nth-child(2)::before{animation-delay:.5s}
+.slide.on .title-chain li:nth-child(3)::before{animation-delay:.8s}
+.slide.on .title-chain li:nth-child(4)::before{animation-delay:1.1s}
+.slide.on .title-chain li:nth-child(5)::before{animation-delay:1.4s}
+@keyframes grow{from{width:0}to{width:100%}}
+@keyframes fill{from{background:var(--bg);border-color:var(--ink)}to{background:var(--amber);border-color:var(--amber)}}
+
+/* Framework core */
+.core{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.core > div{padding:1.2rem 1.2rem 1.3rem;position:relative}
+.core > div + div{border-left:2px solid var(--ink)}
+.core > div:not(:last-child)::after{content:"";position:absolute;right:-15px;top:50%;width:26px;height:26px;
+  background:var(--amber);transform:translateY(-50%) rotate(45deg);z-index:2;border-radius:2px}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--amber-ink);background:var(--amber-soft);
+  padding:.12rem .5rem;border-radius:4px;margin-bottom:.6rem}
+.who{margin-top:.7rem;font-size:.82rem;color:var(--ink-2)}
+.who b{color:var(--ink)}
+.base{margin-top:.8rem;background:var(--navy);color:var(--on-navy);border-radius:10px;padding:1rem 1.2rem;
+  display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;align-items:baseline}
+.base h3{margin:0}
+.base span{font-size:.92rem;opacity:.85}
+
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.6rem}
+.chip{font-size:.82rem;padding:.3rem .65rem;border:1px solid var(--line);border-radius:6px;background:var(--soft)}
+
+/* Levels */
+.levels{display:grid;gap:.6rem}
+.lvl{display:grid;grid-template-columns:9.5rem 1fr;gap:1rem;align-items:start;padding:1rem 1.1rem;border-radius:8px;background:var(--soft)}
+.lvl:nth-child(1){margin-right:0;background:var(--navy);color:var(--on-navy)}
+.lvl:nth-child(1) p{color:var(--on-navy);opacity:.85}
+.lvl:nth-child(2){margin-right:8%}
+.lvl:nth-child(3){margin-right:16%;background:transparent;border:2px solid var(--ink)}
+.lvl h3{font-size:1.2rem}
+.lvl p{margin:0;font-size:.95rem;color:var(--ink-2)}
+.updown{display:flex;flex-direction:column;gap:.9rem;padding-left:1.2rem;border-left:3px solid var(--amber)}
+
+/* Flow PIM > AIM */
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1.25fr;align-items:stretch;gap:.6rem}
+.flow .box{padding:1.1rem;border:2px solid var(--line);border-radius:10px}
+.flow .box.end{border-color:var(--amber);background:var(--amber-soft)}
+.flow .arr{align-self:center;width:3rem;height:4px;background:var(--ink);position:relative}
+.flow .arr::after{content:"";position:absolute;right:-2px;top:-5px;border-left:9px solid var(--ink);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent}
+.flow p{font-size:.92rem;color:var(--ink-2);margin:.2rem 0 0}
+
+/* Repo tree */
+.tree{font-size:.95rem;border:2px solid var(--ink);border-radius:10px;padding:1rem 1.2rem}
+.tree .root{font-weight:750;margin-bottom:.4rem}
+.tree ul{list-style:none;margin:0;padding:0 0 0 1rem;border-left:2px solid var(--line)}
+.tree li{position:relative;padding:.45rem 0 .45rem 1rem}
+.tree li::before{content:"";position:absolute;left:-2px;top:1.15rem;width:.8rem;height:2px;background:var(--line)}
+.tree li b{font-weight:700}
+.tree li span{color:var(--ink-2)}
+.tree li.log b{color:var(--amber-ink)}
+
+/* Pipeline */
+.pipe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin-bottom:1.6rem}
+.pipe div{padding:1rem 1.1rem;border-radius:8px;background:var(--soft);position:relative}
+.pipe div:last-child{background:var(--navy);color:var(--on-navy)}
+.pipe div:last-child p{color:var(--on-navy);opacity:.85}
+.pipe p{font-size:.9rem;color:var(--ink-2);margin:.2rem 0 0}
+
+/* Steps */
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem 1.2rem}
+ol.steps li{counter-increment:s;padding-top:.6rem;border-top:2px solid var(--line);font-size:.93rem}
+ol.steps li::before{content:counter(s);display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;background:var(--amber);color:#0B2545;font-weight:800;font-size:1.15rem;line-height:1;margin-bottom:.6rem}
+ol.steps li b{display:block;color:var(--ink)}
+ol.steps li span{color:var(--ink-2)}
+
+.kinds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-bottom:1.8rem}
+.kinds div{padding:1rem 1.1rem;border-radius:8px;border:2px solid var(--line)}
+.kinds div:nth-child(3){border-color:var(--ink)}
+.kinds p{font-size:.9rem;color:var(--ink-2);margin:.2rem 0 .5rem}
+.kinds .dec{font-size:.85rem;font-weight:650;color:var(--ink)}
+.kinds .dec::before{content:"Otsustab: ";font-weight:400;color:var(--ink-3)}
+
+/* Roles */
+.roles{display:grid;gap:0;border-top:2px solid var(--ink)}
+.role{display:grid;grid-template-columns:8.5rem minmax(0,15rem) 1fr;gap:1.2rem;padding:.85rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.role .lab{font-size:.85rem;color:var(--ink-3)}
+.role h3{margin:0;font-size:1.05rem}
+.role p{margin:0;font-size:.93rem;color:var(--ink-2)}
+.role.key h3{color:var(--amber-ink)}
+
+/* Table */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;padding:.6rem .85rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;background:var(--soft)}
+tr:last-child td{border-bottom:0}
+tr.ee td{background:var(--amber-soft)}
+tr.ee td:first-child{box-shadow:inset 4px 0 0 var(--amber)}
+
+/* Roadmap */
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative}
+.road > div{padding:0 1.2rem 0 0}
+.road .when{display:flex;align-items:center;gap:.7rem;font-weight:800;font-size:1.5rem;margin-bottom:.8rem}
+.road .when::before{content:"";width:26px;height:26px;border-radius:50%;background:var(--amber);flex:none}
+.road > div:nth-child(2) .when::before{background:var(--bg);border:3px solid var(--amber)}
+.road > div:nth-child(3) .when::before{background:var(--bg);border:3px solid var(--ink)}
+.road ul{margin:0;padding:0 0 0 1rem;font-size:.92rem;color:var(--ink-2)}
+.road li{margin-bottom:.45rem}
+.road li::marker{color:var(--amber)}
+
+/* Checklist */
+.checks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.2rem 2.4rem}
+.checks li{position:relative;padding:.6rem 0 .6rem 2rem;border-bottom:1px solid var(--line)}
+.checks li::before{content:"";position:absolute;left:0;top:.8rem;width:1.1rem;height:1.1rem;border:2px solid var(--ink);border-radius:4px}
+
+.value{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.4rem 1.6rem}
+.value div{border-top:2px solid var(--ink);padding-top:.6rem}
+.value p{font-size:.88rem;color:var(--ink-2);margin:0}
+
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem}
+.metrics div{padding-top:.6rem;border-top:3px solid var(--line)}
+.metrics div:last-child{border-top-color:var(--amber)}
+.metrics ul{margin:.3rem 0 0;padding-left:1rem;font-size:.88rem;color:var(--ink-2)}
+.metrics li{margin-bottom:.3rem}
+.vs{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem;font-size:1.05rem}
+.vs s{color:var(--ink-3)}
+.vs b{background:var(--amber-soft);padding:.15rem .5rem;border-radius:4px}
+
+.qs{list-style:none;margin:0;padding:0;counter-reset:q}
+.qs li{counter-increment:q;display:grid;grid-template-columns:2.2rem 1fr;padding:.65rem 0;border-bottom:1px solid var(--line);font-size:1.02rem}
+.qs li::before{content:counter(q);font-weight:800;color:var(--amber-ink)}
+.links{display:flex;flex-direction:column;gap:.7rem}
+.links a{display:block;padding:.7rem 1rem;border:2px solid var(--ink);border-radius:10px;text-decoration:none;font-weight:650}
+.links a small{display:block;font-weight:400;color:var(--ink-2);font-size:.85rem;margin-top:.15rem}
+.links a:hover{border-color:var(--amber);color:var(--ink)}
+
+/* Bottom bar */
+.bottom{display:flex;align-items:center;gap:1rem;padding:.7rem clamp(1rem,4vw,3.5rem) .8rem;border-top:1px solid var(--line)}
+.dots{flex:1;display:flex;align-items:center;min-width:0;position:relative}
+.dots::before{content:"";position:absolute;left:6px;right:6px;top:50%;height:2px;background:var(--line);transform:translateY(-50%)}
+.dots .fillbar{position:absolute;left:6px;top:50%;height:2px;background:var(--amber);transform:translateY(-50%);transition:width .3s}
+.dot{position:relative;flex:1;height:26px;border:0;background:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dot::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--ink-3)}
+.dot.done::before{background:var(--amber);border-color:var(--amber)}
+.dot[aria-current="step"]::before{width:14px;height:14px;background:var(--amber);border:3px solid var(--ink)}
+.counter{font-size:.82rem;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.nav{display:flex;gap:.4rem}
+.nav button{width:2.6rem;height:2.6rem;border-radius:50%;border:2px solid var(--ink);background:var(--bg);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.nav button:hover:not(:disabled){background:var(--ink);color:var(--bg)}
+.nav button:disabled{opacity:.3;cursor:default}
+.nav svg{width:18px;height:18px}
+
+/* Responsive */
+@media (max-width: 900px){
+  .c5,.value,.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  ol.steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .role{grid-template-columns:minmax(0,11rem) 1fr}
+  .role .lab{grid-column:1 / -1;margin-bottom:-.6rem}
+}
+@media (max-width: 720px){
+  .c2,.c3,.split,.split[style*="--l"],.kinds,.pipe,.road,.checks{grid-template-columns:minmax(0,1fr)}
+  .road{gap:1.4rem}
+  .inner{justify-content:flex-start}
+  .chain{grid-auto-flow:row;grid-auto-columns:auto}
+  .chain::before,.chain::after{left:16px;right:auto;top:0;bottom:0;width:4px;height:auto}
+  .chain::after{height:var(--fill,100%)}
+  .slide.on .title-chain::after{animation:growv 1.4s .2s cubic-bezier(.3,.7,.2,1) both}
+  .chain li{padding:0 0 1.3rem 3.3rem}
+  .core{grid-template-columns:1fr}
+  .core > div + div{border-left:0;border-top:2px solid var(--ink)}
+  .core > div:not(:last-child)::after{right:auto;left:1.2rem;top:auto;bottom:-15px;transform:rotate(45deg)}
+  .flow{grid-template-columns:1fr}
+  .flow .arr{width:3px;height:1.4rem;justify-self:start;margin-left:1.4rem}
+  .flow .arr::after{right:auto;left:-5px;top:auto;bottom:-2px;border-top:9px solid var(--ink);border-left:6.5px solid transparent;border-right:6.5px solid transparent;border-bottom:0}
+  .lvl{grid-template-columns:1fr;gap:.3rem}
+  .lvl:nth-child(n){margin-right:0}
+  .top .where span{display:none}
+  .counter{display:none}
+  .dot::before{width:7px;height:7px}
+  .dot[aria-current="step"]::before{width:12px;height:12px}
+}
+@media (max-width: 460px){
+  .c5,.value,.metrics,ol.steps{grid-template-columns:1fr}
+  .role{grid-template-columns:1fr;gap:.2rem}
+  .role .lab{margin-bottom:0}
+  .badge{font-size:.72rem;padding:.25rem .6rem}
+}
+
+/* Docs grid */
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem 1.8rem}
+.docs > div{border-top:3px solid var(--ink);padding-top:.7rem}
+.docs > div.wide{grid-column:span 2}
+.docs p{font-size:.9rem;color:var(--ink-2);margin:0 0 .35rem}
+.docs .sub{font-size:.85rem;margin-top:.5rem;padding-left:.8rem;border-left:3px solid var(--amber)}
+.docs .sub p{margin:0 0 .25rem}
+/* Hierarchy */
+.hier{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;margin-bottom:1.6rem}
+.hier div{padding:.9rem 1rem;border-radius:8px;background:var(--soft);position:relative}
+.hier div:last-child{background:var(--amber-soft);border:2px solid var(--amber)}
+.hier .lv{font-size:.78rem;color:var(--ink-3)}
+.hier code,.fname{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
+.hier code{display:block;font-size:1.6rem;font-weight:700;margin:.2rem 0}
+.hier p{font-size:.85rem;color:var(--ink-2);margin:0}
+.domains{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.1rem 1.4rem}
+.domains div{display:grid;grid-template-columns:1.8rem 1fr;align-items:baseline;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.domains b{font-size:1.7rem;color:var(--amber-ink)}
+.fname{display:inline-block;padding:.35rem .6rem;background:var(--soft);border:1px solid var(--line);border-radius:6px;word-break:break-all}
+ol.steps.five{grid-template-columns:repeat(5,minmax(0,1fr))}
+/* Architecture */
+.arch{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) minmax(0,.8fr);gap:1rem;align-items:stretch}
+.arch .side{display:flex;flex-direction:column;gap:.4rem;justify-content:center}
+.arch .side h3{font-size:.95rem;margin-bottom:.2rem}
+.arch .side span{font-size:.85rem;padding:.35rem .6rem;border:1px solid var(--line);border-radius:6px;background:var(--soft)}
+.arch .side.out span{border-color:var(--amber);background:var(--amber-soft)}
+.arch .mid{display:grid;gap:.5rem}
+.arch .layer{border-radius:10px;padding:1rem 1.1rem}
+.arch .users{border:2px dashed var(--line);font-size:.88rem;color:var(--ink-2)}
+.arch .conf{border:2px solid var(--ink)}
+.arch .db{background:var(--navy);color:var(--on-navy)}
+.arch .db p,.arch .conf p{font-size:.88rem;margin:.25rem 0 0}
+.arch .db p{opacity:.85}
+.arch .db ul{margin:.4rem 0 0;padding-left:1rem;font-size:.85rem;opacity:.9;columns:2;column-gap:1.2rem}
+@media (max-width: 900px){
+  .docs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hier,.domains{grid-template-columns:repeat(2,minmax(0,1fr))}
+  ol.steps.five{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .arch{grid-template-columns:1fr}
+  .arch .side{flex-direction:row;flex-wrap:wrap;justify-content:flex-start}
+  .arch .side h3{width:100%}
+}
+@media (max-width: 460px){
+  .docs,.hier,ol.steps.five{grid-template-columns:1fr}
+  .docs > div.wide{grid-column:auto}
+  .arch .db ul{columns:1}
+}
+
+/* Timeline */
+.chain li.now::before{background:var(--amber);border-color:var(--ink);box-shadow:0 0 0 5px var(--amber-soft)}
+.chain li.now strong{color:var(--amber-ink)}
+.chain li.next::before{border-style:dashed}
+.doccards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.8rem}
+.doccards a{display:block;text-decoration:none;padding:1rem 1.1rem;border:2px solid var(--line);border-radius:10px;color:var(--ink)}
+.doccards a:hover{border-color:var(--amber)}
+.doccards a.main{border-color:var(--ink)}
+.doccards .when2{font-size:.78rem;color:var(--ink-3)}
+.doccards b{display:block;margin:.2rem 0 .35rem;line-height:1.25}
+.doccards span{display:block;font-size:.86rem;color:var(--ink-2)}
+/* Lifecycle break */
+ol.life{list-style:none;margin:2rem 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+ol.life li{position:relative;border-top:5px solid var(--ink);padding:1rem .6rem 0 0;font-size:.9rem}
+ol.life li::before{content:"";position:absolute;left:-2px;top:-14px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:4px solid var(--ink)}
+ol.life li.gap{border-top:5px dashed var(--amber)}
+ol.life li.gap::before{border-color:var(--amber)}
+ol.life li.faint{border-top-color:var(--line)}
+ol.life li.faint::before{border-color:var(--ink-3)}
+ol.life li b{display:block}
+ol.life li em{font-style:normal;color:var(--amber-ink);font-weight:700;font-size:.82rem}
+/* Icons */
+.ico{width:56px;height:56px;display:block;margin-bottom:.6rem;color:var(--ink)}
+.ico .a{stroke:var(--amber)}
+/* Workflow */
+.wf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem}
+.wf .stage{border:2px solid var(--ink);border-radius:10px;padding:1rem 1.1rem;position:relative;background:var(--bg)}
+.wf .stage:not(:last-child)::after{content:"";position:absolute;right:-1.25rem;top:50%;width:0;height:0;border-left:18px solid var(--amber);border-top:14px solid transparent;border-bottom:14px solid transparent;transform:translateY(-50%)}
+.wf .num{display:inline-grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--amber);color:#0B2545;font-weight:800;font-size:1.1rem;margin-right:.4rem}
+.wf h3{display:flex;align-items:center;font-size:1.15rem}
+.wf .meta{font-size:.8rem;color:var(--ink-3);margin:.1rem 0 .6rem}
+.wf dl{margin:0;font-size:.86rem}
+.wf dt{color:var(--ink-3);font-size:.76rem;margin-top:.45rem}
+.wf dd{margin:0;color:var(--ink)}
+.wf dd.out{font-weight:650}
+.wfbase{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:1.1rem;background:var(--navy);color:var(--on-navy);border-radius:10px;position:relative}
+.wfbase div{padding:.8rem 1.1rem;position:relative;font-size:.85rem}
+.wfbase div + div{border-left:1px solid rgba(255,255,255,.18)}
+.wfbase div::before{content:"";position:absolute;left:50%;top:-1.1rem;width:3px;height:1.1rem;background:var(--amber)}
+.wfbase .t{position:absolute;right:1rem;top:-1.7rem;font-size:.78rem;color:var(--ink-2)}
+.wfbase b{display:block;font-size:.9rem;color:var(--amber)}
+.loop{display:flex;align-items:center;gap:.6rem;margin-top:1rem;font-size:.86rem;color:var(--ink-2)}
+.loop::before{content:"";flex:none;width:0;height:0;border-right:10px solid var(--amber);border-top:7px solid transparent;border-bottom:7px solid transparent}
+.loop span{flex:1;border-top:3px dashed var(--amber);padding-top:.35rem}
+/* LOIN */
+.loin{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,.9fr) auto minmax(0,1.3fr);align-items:center;gap:.8rem}
+.loin .col{display:grid;gap:.45rem}
+.loin .in{padding:.55rem .8rem;border:1px solid var(--line);border-radius:8px;background:var(--soft);font-size:.88rem}
+.loin .in b{display:block;font-size:.92rem}
+.loin .core2{aspect-ratio:1;border-radius:50%;background:var(--navy);color:var(--on-navy);display:grid;place-items:center;text-align:center;padding:1rem;max-width:290px;width:100%;justify-self:center}
+.loin .core2 b{font-size:2.9rem;display:block;color:var(--amber);letter-spacing:.02em}
+.loin .core2 span{font-size:.8rem;opacity:.9}
+.loin .arr2{width:1.6rem;height:3px;background:var(--ink);position:relative}
+.loin .arr2::after{content:"";position:absolute;right:-2px;top:-5px;border-left:9px solid var(--ink);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent}
+.loin .outb{padding:.7rem .9rem;border-radius:8px;border-left:4px solid var(--amber);background:var(--amber-soft);font-size:.86rem}
+.loin .outb b{display:block;font-size:.95rem}
+.matrix{border-collapse:separate;border-spacing:0;min-width:0;width:100%;font-size:.85rem}
+.matrix th,.matrix td{border-bottom:1px solid var(--line);padding:.55rem .5rem;text-align:center}
+.matrix th:first-child,.matrix td:first-child{text-align:left}
+.matrix th{background:transparent;font-weight:650;font-size:.8rem;color:var(--ink-2)}
+.pips{display:inline-flex;gap:3px}
+.pip{font-style:normal;width:28px;height:28px;border-radius:6px;border:2px solid var(--line);font-size:.8rem;font-weight:700;display:grid;place-items:center;color:var(--ink-3)}
+.pip.on{background:var(--amber);border-color:var(--amber);color:#0B2545}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;font-size:.8rem;color:var(--ink-2);margin-top:.6rem;align-items:center}
+.legend .pip{display:inline-grid;vertical-align:middle;margin-right:.3rem}
+.hub{display:grid;gap:.5rem}
+.hub div{display:grid;grid-template-columns:2.2rem 1fr;align-items:center;gap:.6rem;padding:.6rem .8rem;border:2px solid var(--line);border-radius:8px;font-size:.88rem}
+.hub div::before{content:"";width:2.2rem;height:3px;background:var(--amber);position:relative}
+.hub b{display:block}
+/* Governance diagram */
+.gov{display:grid;grid-template-columns:minmax(0,1.2fr) 3rem minmax(0,1fr);row-gap:1.4rem;align-items:center}
+.gov .m{border:2px solid var(--ink);border-radius:10px;padding:.8rem 1rem;position:relative;background:var(--bg)}
+.gov .m.own{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+.gov .m.own p{color:var(--on-navy);opacity:.85}
+.gov .m:not(.last)::after{content:"";position:absolute;left:2rem;bottom:calc(-1.4rem - 2px);width:3px;height:1.4rem;background:var(--ink)}
+.gov .m.last{border-color:var(--amber);background:var(--amber-soft)}
+.gov .link{height:0;border-top:3px dashed var(--ink-3)}
+.gov .s{border:2px dashed var(--ink-3);border-radius:10px;padding:.7rem .9rem}
+.gov h3{margin:0 0 .15rem;font-size:1.15rem}
+.gov p{margin:0;font-size:.84rem;color:var(--ink-2)}
+.gov .role2{font-size:.75rem;color:var(--ink-3)}
+.gov .m.own .role2{color:var(--amber)}
+.gov .fb{font-size:.84rem;color:var(--amber-ink);display:flex;gap:.5rem;align-items:center}
+.gov .fb::before{content:"";width:0;height:0;border-bottom:10px solid var(--amber);border-left:7px solid transparent;border-right:7px solid transparent}
+.govlegend{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:1.2rem;font-size:.82rem;color:var(--ink-2)}
+.govlegend span{display:inline-flex;align-items:center;gap:.5rem}
+.govlegend i{display:inline-block;width:2rem;border-top:3px solid var(--ink)}
+.govlegend i.d{border-top-style:dashed;border-top-color:var(--ink-3)}
+/* Ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;align-items:end;margin-top:1.8rem}
+.ladder > div{border-radius:10px 10px 0 0;padding:1rem 1.1rem;background:var(--soft);border-bottom:4px solid var(--ink)}
+.ladder > div:nth-child(1){min-height:10rem}
+.ladder > div:nth-child(2){min-height:14rem;background:var(--amber-soft);border-bottom-color:var(--amber);outline:2px solid var(--amber)}
+.ladder > div:nth-child(3){min-height:18rem}
+.ladder h3{font-size:1.05rem}
+.ladder p{font-size:.86rem;color:var(--ink-2);margin:0 0 .4rem}
+.ladder .w{font-size:.8rem;font-weight:700;color:var(--ink)}
+.ladder .rec{display:inline-block;font-size:.74rem;font-weight:700;background:var(--amber);color:#0B2545;padding:.1rem .45rem;border-radius:4px;margin-bottom:.4rem}
+/* Logic chain for metrics */
+.logic{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-bottom:1.6rem}
+.logic div{padding:1.1rem 1.6rem 1.1rem 1.4rem;background:var(--soft);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%);font-size:.85rem;color:var(--ink-2)}
+.logic div:first-child{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.logic div b{display:block;color:var(--ink);font-size:1.2rem}
+.logic div:last-child{background:var(--amber)}
+.logic div:last-child b,.logic div:last-child{color:#0B2545}
+@media (max-width: 900px){
+  .doccards{grid-template-columns:1fr}
+  .wf,.wfbase{grid-template-columns:1fr}
+  .wf .stage:not(:last-child)::after{right:auto;left:50%;top:auto;bottom:-1.25rem;transform:translateX(-50%);border-left:10px solid transparent;border-right:10px solid transparent;border-top:12px solid var(--amber);border-bottom:0}
+  .wfbase div + div{border-left:0;border-top:1px solid rgba(255,255,255,.18)}
+  .wfbase div::before{display:none}
+  .loin{grid-template-columns:1fr}
+  .loin .arr2{width:3px;height:1.4rem;justify-self:center}
+  .loin .arr2::after{right:auto;left:-5px;top:auto;bottom:-2px;border-top:9px solid var(--ink);border-left:6.5px solid transparent;border-right:6.5px solid transparent;border-bottom:0}
+  .loin .core2{max-width:200px}
+  .gov{grid-template-columns:1fr;row-gap:.6rem}
+  .gov .link{display:none}
+  .gov .m:not(.last)::after{display:none}
+  .gov .s{margin-left:1.4rem;margin-bottom:.6rem}
+  .gov .empty{display:none}
+  .logic{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:.4rem}
+}
+@media (max-width: 720px){
+  ol.life{grid-template-columns:1fr;margin-left:.6rem}
+  ol.life li{border-top:0;border-left:5px solid var(--ink);padding:0 0 1.1rem 1.4rem}
+  ol.life li::before{left:-14px;top:0}
+  ol.life li.gap{border-top:0;border-left:5px dashed var(--amber)}
+  ol.life li.faint{border-left-color:var(--line)}
+  .ladder{grid-template-columns:1fr}
+  .ladder > div:nth-child(n){min-height:0;border-radius:10px}
+}
+
+/* Theme toggle */
+.tools{display:flex;align-items:center;gap:.6rem;flex:none}
+.themebtn{display:inline-flex;align-items:center;gap:.4rem;height:2rem;padding:0 .7rem;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
+.themebtn svg{width:16px;height:16px}
+.themebtn:hover{border-color:var(--amber)}
+/* Funnel of information loss */
+.funnel{position:relative;margin-top:.4rem}
+.band{height:clamp(110px,15vw,190px);background:linear-gradient(90deg,var(--navy) 0%,var(--navy) 48%,#6F8FB5 100%);
+  clip-path:polygon(0 0,16.66% 7%,33.33% 14%,50% 21%,52% 38%,66.66% 41%,83.33% 45%,100% 47%,100% 53%,83.33% 55%,66.66% 59%,52% 62%,50% 79%,33.33% 86%,16.66% 93%,0 100%)}
+.band-lbl{position:absolute;left:1rem;top:calc(clamp(110px,15vw,190px) / 2);transform:translateY(-50%);color:#fff;font-weight:700;font-size:clamp(.8rem,.6rem + .6vw,1.1rem)}
+.gapmark{position:absolute;left:49%;top:0;height:clamp(110px,15vw,190px);width:4%;border-left:3px dashed var(--amber);border-right:3px dashed var(--amber)}
+ol.leaks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 .9rem}
+ol.leaks li{position:relative;padding-top:3.4rem;font-size:.86rem;color:var(--ink-2)}
+ol.leaks li::before{content:"";position:absolute;left:1.1rem;top:.4rem;width:0;height:2.1rem;border-left:3px dashed var(--amber)}
+ol.leaks li::after{content:"";position:absolute;left:calc(1.1rem - 8px);top:2.4rem;border-top:12px solid var(--amber);border-left:9.5px solid transparent;border-right:9.5px solid transparent}
+ol.leaks li.major::before{border-left-width:7px;left:.95rem;border-left-style:solid}
+ol.leaks li.major::after{left:calc(1.1rem - 14px);border-top-width:18px;border-left-width:16px;border-right-width:16px;top:2.3rem}
+ol.leaks b{display:block;color:var(--ink);font-size:1rem;margin-bottom:.2rem}
+ol.leaks em{display:inline-block;margin-top:.45rem;font-style:normal;font-weight:700;font-size:.78rem;color:#0B2545;background:var(--amber);padding:.12rem .5rem;border-radius:4px}
+ol.leaks li:not(.major) em{background:var(--amber-soft);color:var(--amber-ink)}
+/* Value icons */
+.value .ico{width:48px;height:48px;margin-bottom:.4rem}
+/* Contact */
+.contact{margin-top:1.6rem;display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 2rem;padding:1.1rem 1.3rem;border-radius:10px;background:var(--navy);color:var(--on-navy)}
+.contact .org{font-weight:800;font-size:1.25rem}
+.contact a{color:var(--on-navy);font-weight:650}
+.contact a:hover{color:var(--amber)}
+.links .contact a{display:inline;padding:0;border:0;border-radius:0;text-decoration:underline;text-decoration-color:var(--amber);color:var(--on-navy)}
+.links .contact a:hover{color:var(--amber)}
+.contact span{opacity:.9}
+@media (max-width: 720px){
+  .themebtn .lbl{display:none}
+  .themebtn{padding:0 .5rem}
+  ol.leaks{grid-template-columns:1fr;gap:.2rem;margin-top:.8rem}
+  ol.leaks li{padding:.6rem 0 .6rem 2.4rem;border-bottom:1px solid var(--line)}
+  ol.leaks li::before{left:.9rem;top:.6rem;height:1.2rem}
+  ol.leaks li::after{left:calc(.9rem - 8px);top:1.75rem}
+  ol.leaks li.major::before{left:.75rem}
+  ol.leaks li.major::after{left:calc(.9rem - 14px);top:1.7rem}
+  .band-lbl{font-size:.75rem}
+}
+@keyframes growv{from{height:0}to{height:100%}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="where"><b>Digitaalehituse juhtimismudel</b><span id="section"></span></div>
+  <div class="tools">
+    <button type="button" class="themebtn" id="theme" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span class="lbl">Tume</span></button>
+    <div class="badge" title="Tegu on arutelu lähtekohaga, mitte kinnitatud otsusega">Idee konsultatsiooniks</div>
+  </div>
+</header>
+
+<main id="deck" aria-live="polite">
+
+<!-- 1 -->
+<section class="slide" data-section="Sissejuhatus">
+<div class="inner">
+  <h1>Eesti digitaalehituse juhtimismudel 2027+</h1>
+  <p class="lead" style="margin-top:1.2rem">ÜBN 4 haldamine, arendamine ja juurutamine. Ettepanek, kuidas ühtseid BIM-nõudeid (ÜBN 4) püsivalt hoida, et ehitiste teave liiguks katkestusteta vajadusest haldusesse.</p>
+  <div class="note"><p><b>Tegu on ideega, mitte otsusega.</b> Rollid, rahastus ja ajakava on sektoriga arutamiseks. Sinu tagasiside kujundab, milline ettepanek jõuab kinnitamiseni.</p></div>
+  <ol class="chain title-chain" aria-label="Infohalduse ahel">
+    <li><strong>Vajadus</strong><span>Miks infot vaja on</span></li>
+    <li><strong>Nõue</strong><span>Mida hankes küsitakse</span></li>
+    <li><strong>Rakenduskava</strong><span>Kuidas meeskond selle teeb</span></li>
+    <li><strong>Kontrollitud teostus</strong><span>Mis üle antakse</span></li>
+    <li><strong>Kasulik teave</strong><span>Mida halduses kasutatakse</span></li>
+  </ol>
+  <p class="small" style="margin-top:2rem">Digitaalehituse klaster, versioon 2027.01. Liigu nooleklahvide, nuppude või pühkimisega.</p>
+</div>
+</section>
+
+<!-- ajatelg -->
+<section class="slide" data-section="Alusdokumendid" hidden>
+<div class="inner">
+  <h2>Kust see ettepanek tuleb</h2>
+  <ol class="chain" style="--fill:74%" aria-label="Ajatelg">
+    <li class="hit"><strong>2017</strong><span>BIM-deklaratsioon</span></li>
+    <li class="hit"><strong>2022</strong><span>ÜBN 3.1: BIM-modelleerimise nõuded</span></li>
+    <li class="hit"><strong>Märts 2026</strong><span>ÜBN 4 raamistik ja seletuskiri</span></li>
+    <li class="hit"><strong>Suvi 2026</strong><span>Juhtimismudeli eelanalüüs ja kavand</span></li>
+    <li class="hit"><strong>Sügis 2026</strong><span>Kohtumised ja tagasiside sektoriga</span></li>
+    <li class="now"><strong>2027 algus</strong><span>Juhtimismudeli kavand 2027+, praegune konsultatsioon</span></li>
+    <li class="next"><strong>Edasi</strong><span>Otsused ja esimesed 90 päeva</span></li>
+  </ol>
+  <div class="doccards">
+    <a href="https://docs.google.com/document/d/1gVh_Jqij_LpJyWlLBDktw-Ol05Fc3-QdOzi3NTLvnwM/edit?usp=drivesdk" target="_blank" rel="noopener"><span class="when2">Suvi 2026</span><b>Eesti digitaalehituse juhtimismudeli eelanalüüs ja kavand</b><span>Lähteolukord, osapooled, rahvusvaheline võrdlus, alalised tegevused ja esialgne rollijaotus.</span></a>
+    <a class="main" href="https://docs.google.com/document/d/1pOjxpDzYRnigkfGkcy4T2a56i32dlZTy-oFnMOUfIaM/edit?usp=drivesdk" target="_blank" rel="noopener"><span class="when2">2027 algus, kavand</span><b>Eesti digitaalehituse juhtimismudel 2027+</b><span>Rollid ja otsustusõigused, muudatused ja versioonid, rahastus, rakenduskava ja mõõdikud.</span></a>
+    <a href="https://docs.google.com/document/d/1orNCPla3ZzSlC6FPkWqGnTRrP5Rq89kU/edit?usp=drivesdk&amp;ouid=116341425584942830595&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener"><span class="when2">Märts 2026</span><b>ÜBN 4 seletuskiri</b><span>Raamistiku üldpõhimõtted, infohalduse protsess ja lisade ülevaade.</span></a>
+  </div>
+</div>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-section="Lähteolukord" hidden>
+<div class="inner">
+  <h2>Tehnoloogia on olemas. Väärtus kaob teel.</h2>
+  <div class="cols split">
+    <ul class="plain">
+      <li>BIM-põhine projekteerimine on Eestis laialt levinud</li>
+      <li>On loodud e-ehituse platvorm</li>
+      <li>Rahvusvahelised infohalduse standardid on olemas</li>
+      <li>ÜBN 4 raamistik valmis 2026. aastal</li>
+    </ul>
+    <div>
+      <p class="big">Info kaob ja raisatakse kogu olelusringi vältel. Suurim kadu tekib üleandmisel haldusse.</p>
+      <p class="muted" style="margin-top:1rem">Kinnisvarasektori tootlikkus jääb alla Euroopa keskmise. Üks põhjus on, et andmeid ei taaskasutata olelusringi eri etappides.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- infokadu -->
+<section class="slide" data-section="Lähteolukord" hidden>
+<div class="inner">
+  <h2>Info kaob ja raisatakse igas etapis</h2>
+  <div class="funnel" aria-label="Kasutuskõlblik info väheneb olelusringi jooksul">
+    <div class="band" aria-hidden="true"></div>
+    <div class="gapmark" aria-hidden="true"></div>
+    <div class="band-lbl" aria-hidden="true">Kasutuskõlblik info</div>
+    <ol class="leaks">
+      <li><b>Vajadus</b>Eesmärk kirjeldamata, infot tellitakse igaks juhuks<br><em>raisatud töö</em></li>
+      <li><b>Projekteerimine</b>Mudelid ja andmed, mida hiljem keegi ei kasuta<br><em>digiprügi</em></li>
+      <li><b>Ehitus</b>Muudatused ei jõua mudelisse ega dokumentidesse<br><em>vananenud info</em></li>
+      <li class="major"><b>Üleandmine</b>Teostusinfot ei looda või see ei sobi haldussüsteemi<br><em>suurim kadu</em></li>
+      <li><b>Kasutus ja haldus</b>Andmed sisestatakse käsitsi uuesti ja vananevad<br><em>kordustöö</em></li>
+      <li><b>Renoveerimine</b>Alustatakse taas mõõdistamisest<br><em>ring algab otsast</em></li>
+    </ol>
+  </div>
+  <p class="small" style="margin-top:1.4rem">Joonis on illustreeriv: riba kõrgus näitab edasi kasutatavat infot. Tegelik mõju mõõdetakse pilootides.</p>
+</div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-section="Lähteolukord" hidden>
+<div class="inner">
+  <h2>Kitsaskoht ei ole tehnoloogia, vaid tervik</h2>
+  <div class="cols c5">
+    <div class="rule"><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="7" cy="9" r="3.5"/><circle cx="25" cy="7" r="3.5"/><circle cx="16" cy="25" r="3.5"/><path class="a" d="M10.5 10.5l2.5 2M22 9l-2.5 2M16 21v-3" stroke-dasharray="2 2.5"/></svg><h3>Killustunud vastutus</h3><p>Valdkonnal pole selget omanikku ega otsustusahelat.</p></div>
+    <div class="rule"><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="12" width="7" height="8" rx="1.5"/><rect x="22" y="12" width="7" height="8" rx="1.5"/><path class="a" d="M12 16h8" stroke-dasharray="2 2.5"/></svg><h3>Projektipõhine arendus</h3><p>ÜBN 4 ja selle eelkäijad on sündinud tähtajalistest projektidest ja vabatahtlikust tööst.</p></div>
+    <div class="rule"><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 3h11l6 6v20H8z"/><path d="M19 3v6h6"/><path class="a" d="M14 16a3 3 0 1 1 3.5 3c-.9.3-1.5.9-1.5 1.8V22M16 25.5v.5"/></svg><h3>Teave enne vajadust</h3><p>Alustatakse mudeli vormistamisest, mitte tellija eesmärgist.</p></div>
+    <div class="rule"><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M13 19l-3 3a4 4 0 0 1-5.7-5.7l3-3a4 4 0 0 1 5.7 0"/><path d="M19 13l3-3a4 4 0 0 1 5.7 5.7l-3 3a4 4 0 0 1-5.7 0"/><path class="a" d="M16 5v4M16 23v4M5 16h-2M29 16h-2"/></svg><h3>Katkestused etappide vahel</h3><p>Projekti andmed ei jõua sobival kujul haldusse.</p></div>
+    <div class="rule"><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 28h24"/><rect x="6" y="18" width="5" height="10"/><rect x="14" y="8" width="5" height="20" class="a"/><rect x="22" y="22" width="5" height="6"/></svg><h3>Ebaühtlane võimekus</h3><p>Tellijatel napib lihtsaid malle, kasutusjuhte ja kontrollivahendeid.</p></div>
+  </div>
+  <div class="note"><p>Regulatsioonid, standardid, hanked, tööprotsessid ja IT-süsteemid ei moodusta veel tervikut. Seda tervikut peab keegi püsivalt hoidma.</p></div>
+</div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-section="ÜBN 4 raamistik" hidden>
+<div class="inner">
+  <h2>ÜBN 4: BIM-nõuetest infohalduse raamistikuks</h2>
+  <div class="cols c2">
+    <div class="rule">
+      <h3>ÜBN 3.1 (2022)</h3>
+      <ul class="plain muted">
+        <li>BIM-mudelid ehitamise jaoks</li>
+        <li>Tehniline juhis modelleerijale</li>
+        <li>Rakendati projektide kaupa</li>
+      </ul>
+    </div>
+    <div class="rule a">
+      <h3>ÜBN 4 (2026)</h3>
+      <ul class="plain">
+        <li>Infohaldus kogu vara olelusringis</li>
+        <li>Mudelid, joonised, dokumendid ja tabelid ühes loogikas</li>
+        <li>Vajaduspõhine: organisatsioonist projektini</li>
+        <li>Masinloetavad ja omavahel seotud tabelid</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:1.6rem;margin-bottom:.2rem"><b>Tugineb rahvusvahelistele standarditele</b></p>
+  <div class="chips">
+    <span class="chip">EVS-EN ISO 19650 infohaldus</span>
+    <span class="chip">EN ISO 7817-1 infovajaduse tase</span>
+    <span class="chip">ISO 12006-2 ja ISO 81346, CCI-EE</span>
+    <span class="chip">IFC (ISO 16739-1)</span>
+    <span class="chip">COBie v3</span>
+    <span class="chip">EVS 932 ja EVS 807</span>
+  </div>
+  <p class="small" style="margin-top:1.4rem">ÜBN 4 ei asenda õigusakte ega standardeid, vaid aitab neid koos rakendada. Arendus sündis Maa- ja Ruumiameti algatusel koos Kliimaministeeriumi, Tallinna linna, Riigi Kinnisvara, Transpordiameti, Tallinna Sadama ja Rail Balticuga. <a href="https://docs.google.com/document/d/1orNCPla3ZzSlC6FPkWqGnTRrP5Rq89kU/edit?usp=drivesdk&amp;ouid=116341425584942830595&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">Loe ÜBN 4 seletuskirja</a></p>
+</div>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-section="ÜBN 4 raamistik" hidden>
+<div class="inner">
+  <h2>Raamistiku tuum: vajadusest koostööni</h2>
+  <div class="core">
+    <div>
+      <span class="tag">LISA 4</span>
+      <h3>Vajadused</h3>
+      <p class="muted" style="font-size:.93rem;margin:0">Mida ja milleks organisatsioon oma varade juhtimiseks teada vajab.</p>
+      <div class="who">Vastutab <b>tellija</b></div>
+    </div>
+    <div>
+      <span class="tag">LISA 1</span>
+      <h3>Nõuded</h3>
+      <p class="muted" style="font-size:.93rem;margin:0">Mida hankes küsitakse: kasutusjuhud, infovahetuse nõuded ja infovajaduse tase.</p>
+      <div class="who">Vastutab <b>tellija</b></div>
+    </div>
+    <div>
+      <span class="tag">LISA 2</span>
+      <h3>Rakenduskava</h3>
+      <p class="muted" style="font-size:.93rem;margin:0">Kuidas projektimeeskond nõuded täidab ja koostööd korraldab.</p>
+      <div class="who">Vastutab <b>peatöövõtja</b></div>
+    </div>
+  </div>
+  <div class="base">
+    <h3>Alusandmed (LISA 3)</h3>
+    <span>varaelemendid, CCI-EE klassifikaator, atribuudid ja andmemallid, IFC 4.3 seosed</span>
+  </div>
+  <div class="note"><p>Täna käib protsess sageli tagurpidi: lähtutakse töövõtja plaanist ja tehnilisest vormistusest ning vajadust otsitakse alles hiljem.</p></div>
+</div>
+</section>
+
+<!-- koosseis -->
+<section class="slide" data-section="ÜBN 4 raamistik" hidden>
+<div class="inner">
+  <h2>ÜBN 4 koosseis</h2>
+  <div class="docs">
+    <div>
+      <span class="tag">Alus</span>
+      <h3>Seletuskiri</h3>
+      <p>Üldpõhimõtted, mõisted, osaliste rollid, infovahetuse protsess, info- ja andmemudel ning rakendamine organisatsioonis ja projektis.</p>
+      <p><a href="https://docs.google.com/document/d/1orNCPla3ZzSlC6FPkWqGnTRrP5Rq89kU/edit?usp=drivesdk&amp;ouid=116341425584942830595&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">Ava ÜBN 4 seletuskiri</a></p>
+    </div>
+    <div>
+      <span class="tag">LISA 4</span>
+      <h3>Vajadused</h3>
+      <p>Organisatsiooni eesmärgid, võimekused ja varad, millest tuletatakse organisatsiooni (OIR) ja vara infonõuded (AIR).</p>
+    </div>
+    <div>
+      <span class="tag">LISA 2</span>
+      <h3>Rakenduskava</h3>
+      <p>Peatöövõtja alusmall: vastavusplaan, meeskond, tehnoloogiad, koondi strateegia, varaderegister, erisused, dokumendihaldus ja riskid.</p>
+    </div>
+    <div class="wide">
+      <span class="tag">LISA 1</span>
+      <h3>Nõuded</h3>
+      <p>Nõuete konfiguraator ja sellest tehtud kuupäevaline väljavõte: mõisted, tegevuste kontroll-loend, kasutusjuhud, infovahetuse nõuded, infovajaduse tase, üld-, projektiosade ja vormistuse nõuded ning tolerantsid.</p>
+      <div class="sub">
+        <p><b>LISA 1.1 IDS BIMis</b> IFC-modelleerimise baasjuhis koostöös EVS TK50-ga</p>
+        <p><b>LISA 1.2 COBie v3 alusmall</b> haldusse üleantavate varade andmed</p>
+      </div>
+    </div>
+    <div>
+      <span class="tag">LISA 3</span>
+      <h3>Alusandmed</h3>
+      <p>Varaelemendid, projektiosad, süsteemid, andmemallid, atribuudid, osalised, infokonteinerid ja olelusringi etapid. Kõik teised lisad viitavad neile.</p>
+    </div>
+  </div>
+  <p class="small" style="margin-top:1.4rem">Lisaks <a href="https://digipark.notion.site/ybn" target="_blank" rel="noopener">ÜBN 4 wiki</a> rakendusjuhistega (digi-)targale tellijale.</p>
+</div>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-section="ÜBN 4 raamistik" hidden>
+<div class="inner">
+  <h2>Kasutusjuht ütleb, miks infot vaja on</h2>
+  <div class="cols c2">
+    <div>
+      <p><b>Infovajaduse tase vastab viiele küsimusele</b></p>
+      <ul class="plain">
+        <li><b>Miks</b> <span class="muted">kasutusjuht, nt ehitusluba või korrashoid</span></li>
+        <li><b>Millal</b> <span class="muted">staadium, etapp või tähtaeg</span></li>
+        <li><b>Kellelt</b> <span class="muted">roll, distsipliin või osaline</span></li>
+        <li><b>Mida</b> <span class="muted">varaelement, nt aken, ruum, süsteem</span></li>
+        <li><b>Kuidas</b> <span class="muted">mudel, joonis, tabel või dokument</span></li>
+      </ul>
+    </div>
+    <div>
+      <p><b>Raamistiku baaskasutusjuhud</b></p>
+      <ul class="plain">
+        <li>Minimaalsed nõuded 2D/3D esitusele</li>
+        <li>Ehitus- ja kasutusluba</li>
+        <li>Mahuarvutus ja eelarvestus</li>
+        <li>Hooldatavate varade info</li>
+        <li>Ehitiste ja pindade haldus</li>
+      </ul>
+      <p class="small" style="margin-top:.6rem">Iga organisatsioon saab lisada oma kasutusjuhte.</p>
+    </div>
+  </div>
+  <div class="note"><p>Eesmärk on tellida täpselt nii palju infot, kui eesmärk vajab. Mitte rohkem, mitte vähem.</p></div>
+</div>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-section="ÜBN 4 raamistik" hidden>
+<div class="inner">
+  <h2>Üks ühisosa, kolm tasandit</h2>
+  <div class="cols split" style="--l:1.6fr">
+    <div class="levels">
+      <div class="lvl"><h3>Sektor</h3><p>Riiklik ÜBN 4: kõigile ühine baas. Esmalt avaliku sektori tellijate hangetes.</p></div>
+      <div class="lvl"><h3>Organisatsioon</h3><p>Tellija kohandab ÜBN 4 oma varade, protsesside ja IT-süsteemidega. Näide: RKAS nõuded mitteeluhoonetele.</p></div>
+      <div class="lvl"><h3>Projekt</h3><p>Lepingulised nõuded konkreetsele ehitusele, nt uuele koolimajale: riiklik ühisosa, organisatsiooni kohandus ja projekti eripära.</p></div>
+    </div>
+    <div class="updown">
+      <p class="big" style="font-size:clamp(1.2rem,.9rem + 1vw,1.7rem)">Kohandus liigub alla, parim praktika tagasi üles.</p>
+      <p class="muted">Väiksemale tellijale peab jääma lihtne projektipõhine komplekt, mis ei nõua ebamõistlikku pingutust ega tooda digiprügi.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 8 -->
+<section class="slide" data-section="ÜBN 4 raamistik" hidden>
+<div class="inner">
+  <h2>Siht on vara infomudel</h2>
+  <div class="flow">
+    <div class="box"><h3>Projekti infomudel (PIM)</h3><p>Ehitamiseks. Muutub ja täpsustub koos projekti staadiumitega.</p></div>
+    <div class="arr" aria-hidden="true"></div>
+    <div class="box"><h3>Teostusinfo</h3><p>Tegelik väljaehitatud ehitis, kontrollitud sisuga.</p></div>
+    <div class="arr" aria-hidden="true"></div>
+    <div class="box end"><h3>Vara infomudel (AIM)</h3><p>Kasutamiseks ja haldamiseks. Üle võetakse ainult vajalik ja kontrollitud info.</p></div>
+  </div>
+  <div class="cols c2" style="margin-top:2rem">
+    <p class="big">Teostusinfo ei ole automaatselt vara infomudel.</p>
+    <p class="muted">AIM ei ole üks BIM-mudel. See koondab mudelid, dokumendid ja tabelandmed, mis on püsiva tunnuse kaudu seotud varaelemendiga ja hoitud ühtses andmekeskkonnas (CDE).</p>
+  </div>
+</div>
+</section>
+
+<!-- alusandmed -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>Alusandmed: ühine sõnavara varaelemendi tasemel</h2>
+  <div class="hier" aria-label="Varaelemendi grupeerimise tasemed">
+    <div><span class="lv">G1 domeen</span><code>P</code><p>Ehituskomponent (ISO 81346-12)</p></div>
+    <div><span class="lv">G2 klassifikaator</span><code>P.NC_</code><p>Viimistlev komponent (CCI-EE)</p></div>
+    <div><span class="lv">G3 klassifikaator</span><code>P.NCA</code><p>CCI-EE täpsem grupp</p></div>
+    <div><span class="lv">Tüüp</span><code>P.NCA10</code><p>Tellija varaelement. Siia seotakse nõuded, andmemall, ühik ja IFC 4.3 klass.</p></div>
+  </div>
+  <p style="margin-bottom:.3rem"><b>Esimese taseme domeenid</b></p>
+  <div class="domains">
+    <div><b>A</b><span>Projekt</span></div>
+    <div><b>B</b><span>Ehitatud ruum</span></div>
+    <div><b>C</b><span>Ehituskompleks</span></div>
+    <div><b>E</b><span>Ehitis</span></div>
+    <div><b>L</b><span>Funktsionaalne ja tehniline süsteem</span></div>
+    <div><b>P</b><span>Ehituskomponent</span></div>
+    <div><b>S</b><span>Korrus või tasapind</span></div>
+    <div><b>Z</b><span>Tsoon</span></div>
+  </div>
+  <div class="note"><p>Üks CCI-EE kood võib hõlmata mitut varaelementi: XMA10 Kaev ja XMA90 Toruliidestus saavad eraldi nõuded. Nii seob sama loend ehitusprojekti (EVS 932), eelarve (EVS 885, ICMS 3) ja halduse (EVS 807).</p></div>
+</div>
+</section>
+
+<!-- atribuudid -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>Andmemall kirjeldab varaelementi atribuutidega</h2>
+  <div class="cols split" style="--l:1.3fr">
+    <div class="tablewrap">
+      <table style="min-width:420px">
+        <thead><tr><th>Administratiivne atribuut</th><th>Milleks</th></tr></thead>
+        <tbody>
+          <tr><td>001_Nimetus</td><td>Inimloetav tüübi kirjeldus</td></tr>
+          <tr><td>005_Tüüp</td><td>Tüübi unikaalne kood projektis</td></tr>
+          <tr><td>010_Süsteem</td><td>Kuuluvus süsteemi</td></tr>
+          <tr><td>015_ID</td><td>Üksiku elemendi unikaalsus</td></tr>
+          <tr><td>020_Varagrupp</td><td>Viide kokkulepitud varagrupile</td></tr>
+          <tr><td>030_Ühik ja 035_Maht</td><td>Mahuühik ja väärtus</td></tr>
+          <tr><td>040_Materjal</td><td>Põhimaterjal</td></tr>
+          <tr><td>045_Klassifikaator</td><td>Masintöötlus ja integratsioonid</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <ul class="plain">
+        <li><b>Varaelemendi-spetsiifilised atribuudid</b> <span class="muted">kasutavad CIA-DD koodi: kaks tähte ja number, nt MA = mõõt, pindala.</span></li>
+        <li><b>Definitsioon allikast</b> <span class="muted">tuleb standardist või CIA-DD-st, täitmisjuhis eraldi veerus.</span></li>
+        <li><b>IFC vasted</b> <span class="muted">IFC 2.3 ja IFC 4.3 omaduste nimed kõrvuti.</span></li>
+        <li><b>Ühik nimes</b> <span class="muted">nt #m, et väärtus oleks üheselt tõlgendatav.</span></li>
+      </ul>
+      <p class="small" style="margin-top:.6rem">Milliseid atribuute konkreetselt nõutakse, otsustab kasutusjuht ja infovajaduse tase.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- töövoog -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>Konfiguraatori töövoog: vajadustest rakenduskavani</h2>
+  <div class="wf">
+    <div class="stage">
+      <h3><span class="num">1</span>Vajadused</h3>
+      <div class="meta">LISA 4, koostab tellija</div>
+      <dl>
+        <dt>Sisend</dt><dd>Organisatsiooni eesmärgid ja varahalduse strateegia</dd>
+        <dt>Konfiguraatoris</dt><dd>Vali hallatavad varaelemendid ja olulised kasutusjuhud, sõnasta OIR ja AIR</dd>
+        <dt>Väljund</dt><dd class="out">Vajaduste profiil ja vara infomudeli (AIM) sisu</dd>
+      </dl>
+    </div>
+    <div class="stage">
+      <h3><span class="num">2</span>Nõuded</h3>
+      <div class="meta">LISA 1, koostab tellija</div>
+      <dl>
+        <dt>Sisend</dt><dd>Vajaduste profiil ja projekti lähteülesanne (PIR)</dd>
+        <dt>Konfiguraatoris</dt><dd>Kasutusjuhud, infovahetuse nõuded (EIR) ja infovajaduse tase (LOIN) varaelemendi kaupa</dd>
+        <dt>Väljund</dt><dd class="out">Kuupäevaline nõuete komplekt hankesse</dd>
+      </dl>
+    </div>
+    <div class="stage">
+      <h3><span class="num">3</span>Rakenduskava</h3>
+      <div class="meta">LISA 2, koostab peatöövõtja</div>
+      <dl>
+        <dt>Sisend</dt><dd>Hanke nõuete komplekt</dd>
+        <dt>Konfiguraatoris</dt><dd>Vastavusplaan vastab igale nõudele; varaderegister, koondi strateegia, dokumendihaldus</dd>
+        <dt>Väljund</dt><dd class="out">Tellija kinnitatud rakenduskava</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="wfbase">
+    <div><b>Varaelemendid ja klassifikaatorid</b>CCI-EE, domeenid, olelusringi etapid</div>
+    <div><b>Andmemallid ja atribuudid</b>projektiosad, ühikud, IFC 4.3 vasted</div>
+    <div><b>Osalised ja infokonteinerid</b>rollid, dokumendiliigid, failinimed</div>
+  </div>
+  <p class="small" style="margin:.5rem 0 0">Kõik kolm sammu kasutavad samu LISA 3 alusandmeid. Seepärast räägivad tellija nõue ja töövõtja plaan sama keelt.</p>
+  <div class="loop"><span>Teostus, kontroll ja üleandmine AIM-i: õppetunnid liiguvad tagasi vajadustesse ja ühisosasse</span></div>
+</div>
+</section>
+
+<!-- LOIN -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>Infovajaduse tase (LOIN): kui palju infot, kellele ja millal</h2>
+  <div class="loin">
+    <div class="col">
+      <div class="in"><b>Eesmärk</b>kasutusjuht, nt ehitusluba</div>
+      <div class="in"><b>Verstapost</b>staadium või tähtaeg</div>
+      <div class="in"><b>Osalised</b>kes annab, kes saab</div>
+      <div class="in"><b>Objektid</b>varaelemendid LISA 3 järgi</div>
+    </div>
+    <div class="arr2" aria-hidden="true"></div>
+    <div class="core2"><div><b>LOIN</b><span>EN ISO 7817-1</span></div></div>
+    <div class="arr2" aria-hidden="true"></div>
+    <div class="col">
+      <div class="outb"><b>Geomeetriline info</b>detailsus, mõõtmelisus, asukoht, välimus, parameetriline käitumine</div>
+      <div class="outb"><b>Tähtnumbriline info</b>identifitseerimine ja infosisu, ehk andmemall ja atribuudid</div>
+      <div class="outb"><b>Dokumentatsioon</b>nõutud dokumentide kogum</div>
+    </div>
+  </div>
+  <div class="note"><p>Standard ütleb: kirjelda ainult seda, mida eesmärk vajab. Kui mõni osa pole asjakohane, märgitakse see mittevajalikuks. Nii tellitakse täpselt õige hulk infot.</p></div>
+</div>
+</section>
+
+<!-- LOIN konfiguraatoris -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>LOIN on konfiguraatori keskne sõlm</h2>
+  <div class="cols split" style="--l:1.25fr">
+    <div>
+      <div class="tablewrap" style="border:0">
+        <table class="matrix" aria-label="Näide infovajaduse tasemest">
+          <thead><tr><th>Varaelement</th><th>Eelprojekt</th><th>Põhiprojekt</th><th>Tööprojekt</th><th>Teostus</th></tr></thead>
+          <tbody>
+            <tr><td>Ruum</td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip on">D</i></span></td></tr>
+            <tr><td>Aken</td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip on">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip on">D</i></span></td></tr>
+            <tr><td>Ventilatsiooni&shy;seade</td>
+              <td><span class="pips"><i class="pip">G</i><i class="pip">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip">D</i></span></td>
+              <td><span class="pips"><i class="pip on">G</i><i class="pip on">A</i><i class="pip on">D</i></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend"><span><i class="pip on">G</i>geomeetria</span><span><i class="pip on">A</i>atribuudid</span><span><i class="pip on">D</i>dokumendid</span><span>Illustreeriv näide</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:.6rem"><b>Üks kirje, neli väljundit</b></p>
+      <div class="hub">
+        <div><span><b>Hankenõue</b><span class="muted">LISA 1 väljavõte</span></span></div>
+        <div><span><b>Automaatkontroll</b><span class="muted">IDS-fail mudeli kontrolliks</span></span></div>
+        <div><span><b>Vastavusplaan</b><span class="muted">LISA 2 rida töövõtjale</span></span></div>
+        <div><span><b>Haldusse üleandmine</b><span class="muted">COBie v3 ja AIM</span></span></div>
+      </div>
+      <p class="small" style="margin-top:.8rem">Sama verstaposti eri kasutusjuhtude vajadused liidetakse, et sama infot ei nõutaks kaks korda.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- konfiguraator -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>Nõuete konfiguraator täna: kasutusjuhust hankelisani</h2>
+  <ol class="steps five">
+    <li><b>Vali kasutusjuhud</b><span>nt ehitusluba, eelarvestus, hooldatavad varad</span></li>
+    <li><b>Seo infovahetuse nõuded</b><span>mida, millal, kellelt ja mis vormingus (EIR)</span></li>
+    <li><b>Määra infovajaduse tase</b><span>varaelemendi kaupa geomeetria, atribuudid ja dokumendid staadiumiti</span></li>
+    <li><b>Kontrolli koondvaateid</b><span>automaatsed vaated andmemalli ja varaelemendi lõikes</span></li>
+    <li><b>Ekspordi väljavõte</b><span>kuupäevaline .xlsx organisatsioonile või projektile</span></li>
+  </ol>
+  <p style="margin-top:1.6rem;margin-bottom:.4rem"><span class="fname">UBN40_LISA1-Nõuded_RKAS-20251215_008-Koolimaja.xlsx</span></p>
+  <p class="small">Nimes on näha raamistiku versioon, organisatsioon, kuupäev ja projekt.</p>
+  <div class="note"><p>Tänane lahendus on omavahel seotud Google Sheetsi failid. ÜBN 4 seletuskiri ise näeb ette nende asendamist andmebaasipõhise veebilahendusega, mis on mugavam, võimekam ja skaleeruv.</p></div>
+</div>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-section="Haldus veebis" hidden>
+<div class="inner">
+  <h2>Kus ÜBN 4 täna veebis elab</h2>
+  <div class="cols c3">
+    <div class="rule">
+      <h3>Alusfailid</h3>
+      <p>Seletuskiri ja lisad 1–4 Google Drive'is. Organisatsioon teeb neist kuupäevaga fikseeritud väljavõtte oma hangete jaoks.</p>
+      <p style="margin-top:.6rem"><a href="https://docs.google.com/document/d/1orNCPla3ZzSlC6FPkWqGnTRrP5Rq89kU/edit?usp=drivesdk&amp;ouid=116341425584942830595&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">ÜBN 4 seletuskiri</a></p>
+    </div>
+    <div class="rule">
+      <h3>Tabelid ja konfiguraator</h3>
+      <p>LISA 1–3 omavahel seotud Google Sheetsi failidena. Alusandmed peegelduvad nõuetesse ja rakenduskavasse varjatud andmelinkide kaudu.</p>
+    </div>
+    <div class="rule">
+      <h3>ÜBN 4 wiki</h3>
+      <p>Rakendusjuhised (digi-)targale tellijale: vajadused, nõuded, koostöö ja alusandmed loetaval veebikujul.</p>
+      <p style="margin-top:.6rem"><a href="https://digipark.notion.site/ybn" target="_blank" rel="noopener">Ava ÜBN 4 wiki</a></p>
+    </div>
+  </div>
+  <div class="note"><p>See töötab, kuid muudatuste, versioonide ja otsuste ajalugu ei ole avalikult jälgitav ning hooldus sõltub projektide rahastusest.</p></div>
+</div>
+</section>
+
+<!-- arhitektuur -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>Ettepanek: alusandmete baas ja veebikonfiguraator</h2>
+  <div class="arch">
+    <div class="side">
+      <h3>Välised alusallikad</h3>
+      <span>CCI-EE</span><span>IFC 4.3</span><span>bSDD</span><span>CIA-DD</span><span>EVS 932, EVS 807</span>
+    </div>
+    <div class="mid">
+      <div class="layer users">Tellija, projekteerija, ehitaja, haldur ja tarkvaratootja kasutavad sama allikat</div>
+      <div class="layer conf">
+        <h3>Veebipõhine nõuete konfiguraator</h3>
+        <p>Vali kasutusjuhud, määra infovajaduse tase, lisa organisatsiooni kohandus ja ekspordi projekti nõuded.</p>
+      </div>
+      <div class="layer db">
+        <h3>ÜBN 4 alusandmete baas</h3>
+        <p>Üks versioonitud tõeallikas avatud liidesega (API)</p>
+        <ul>
+          <li>varaelemendid ja klassifikaatorid</li>
+          <li>atribuudid ja andmemallid</li>
+          <li>kasutusjuhud ja infovajaduse tasemed</li>
+          <li>projektiosad, osalised, infokonteinerid</li>
+          <li>organisatsioonide kohandused</li>
+          <li>versioonid ja muudatuste ajalugu</li>
+        </ul>
+      </div>
+    </div>
+    <div class="side out">
+      <h3>Väljundid</h3>
+      <span>Nõuded .xlsx ja PDF hankesse</span><span>IDS automaatkontrolliks</span><span>COBie v3 mall haldusse</span><span>Andmed e-ehitusele</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- baasi nõuded -->
+<section class="slide" data-section="Alusandmed ja tööriistad" hidden>
+<div class="inner">
+  <h2>Mida alusandmete baas peab võimaldama</h2>
+  <div class="cols split">
+    <ul class="checks" style="grid-template-columns:1fr">
+      <li>Iga kirje on versioonitud ja muudatus põhjendatud</li>
+      <li>Organisatsiooni kohandus lisandub ühisosale, mitte ei kirjuta seda üle</li>
+      <li>Nõuded on masinloetavad ja kontrollitavad (IDS)</li>
+      <li>Avatud liides tarkvaratootjatele ja riiklikele süsteemidele</li>
+      <li>Avalik lugemisõigus, andmed jäävad riigi omandisse</li>
+      <li>Tarkvaraneutraalne ja teisele haldurile üleantav</li>
+    </ul>
+    <div class="road" style="grid-template-columns:1fr;gap:1.2rem">
+      <div><div class="when">Samm 1</div><ul><li>LISA 3 alusandmed Sheetsist andmebaasi, ühisosa ja kohanduste eristamine</li></ul></div>
+      <div><div class="when">Samm 2</div><ul><li>Veebipõhine konfiguraator LISA 1 asemel, eksport praegustesse vormingutesse</li></ul></div>
+      <div><div class="when">Samm 3</div><ul><li>IDS-kontrollid, bSDD sidumine ja liides e-ehitusega prioriteetsetele kasutusjuhtudele</li></ul></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-section="Haldus veebis" hidden>
+<div class="inner">
+  <h2>Ettepanek: ÜBN 4 kui avatud koostööprojekt</h2>
+  <div class="cols split">
+    <div class="tree" aria-label="Repositooriumi ülesehitus">
+      <div class="root">ÜBN 4 avalik repositoorium</div>
+      <ul>
+        <li><b>raamistik</b> <span>seletuskiri ja alustabelid</span></li>
+        <li><b>juhendid</b> <span>veebipõhised rakendusjuhised</span></li>
+        <li><b>alusandmed</b> <span>eksport alusandmete baasist, et iga väljalase oleks fikseeritud</span></li>
+        <li><b>kasutusjuhud</b> <span>infovajaduse tasemed ja automaatkontrollid (IDS)</span></li>
+        <li><b>kohandused</b> <span>organisatsioonide ja projektide nõuded</span></li>
+        <li class="log"><b>muudatuste logi</b> <span>iga muudatus koos põhjendusega</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="lead" style="margin-bottom:1.2rem">Tarkvaraarendusest tuntud mudel, nagu Linux Foundationil, buildingSMARTil või Wikipedial.</p>
+      <ul class="plain">
+        <li><b>Selge muudatuste haldus.</b> <span class="muted">Iga ettepanek läbib sisulise ja tehnilise ülevaatuse.</span></li>
+        <li><b>Jälgitav ajalugu.</b> <span class="muted">Iga muudatuse põhjus on auditeeritav.</span></li>
+        <li><b>Etteaimatavad väljalasked.</b> <span class="muted">Alustuseks näiteks kord aastas.</span></li>
+        <li><b>Edasi:</b> <span class="muted">veebipõhine nõuete konfiguraator Google Sheetsi asemel.</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-section="Haldus veebis" hidden>
+<div class="inner">
+  <h2>ÜBN 4 versioonid, millele saab hankes kindlalt viidata</h2>
+  <div class="pipe">
+    <div><h3>Arendus- või pilootversioon</h3><p>Katsetamiseks ja täiendamiseks</p></div>
+    <div><h3>Väljalaskekandidaat</h3><p>Testitud, ootab vastuvõttu</p></div>
+    <div><h3>Stabiilne väljalase</h3><p>Viidatakse hangetes ja lepingutes</p></div>
+  </div>
+  <div class="cols c2">
+    <ul class="plain">
+      <li>Hanges viidatakse alati konkreetsele stabiilsele versioonile</li>
+      <li>Uus versioon ei muuda juba sõlmitud lepingu nõudeid</li>
+      <li>Avalik teekaart ulatub vähemalt ühe eelarve- ja hanketsükli võrra ette</li>
+    </ul>
+    <ul class="plain">
+      <li><b>ÜBN 3.2</b> <span class="muted">hooldusversioon jooksvate projektide stabiilsuseks</span></li>
+      <li><b>ÜBN 4.x</b> <span class="muted">arendusharu uue infohalduse loogika piloteerimiseks</span></li>
+      <li>Üleminekuplaan: kes, millal ja kui kaua vana versiooni toetatakse</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-section="Haldus veebis" hidden>
+<div class="inner">
+  <h2>Kuidas muudatus sünnib</h2>
+  <div class="kinds">
+    <div><h3>Parandus</h3><p>Keele-, viite- või vormistusviga, mis nõude tähendust ei muuda.</p><div class="dec">ÜBN 4 tooteomanik (Maa- ja Ruumiamet)</div></div>
+    <div><h3>Funktsionaalne muudatus</h3><p>Muudab nõuet, andmestruktuuri või juhist mandaadi piires.</p><div class="dec">Maa- ja Ruumiamet</div></div>
+    <div><h3>Strateegiline muudatus</h3><p>Muudab ulatust, kohustuslikkust, juhtimist või rahastust.</p><div class="dec">Kliimaministeerium</div></div>
+  </div>
+  <ol class="steps">
+    <li><b>Registreerimine</b><span>avalikus muudatuste registris</span></li>
+    <li><b>Esmakontroll</b><span>haldur: terviklikkus, dubleerimine, huvid</span></li>
+    <li><b>Liigitus ja prioriteet</b><span>tooteomanik Maa- ja Ruumiametis</span></li>
+    <li><b>Mõjuanalüüs ja piloot</b><span>kasutajad, kulud, õigus, tarkvara</span></li>
+    <li><b>Soovitus</b><span>tehniline nõukogu</span></li>
+    <li><b>Otsus</b><span>pädev omanik koos põhjendusega</span></li>
+    <li><b>Väljalase</b><span>koos üleminekujuhise ja toega</span></li>
+    <li><b>Järelhindamine</b><span>õppetunnid järgmisse tsüklisse</span></li>
+  </ol>
+</div>
+</section>
+
+<!-- juhtimisskeem -->
+<section class="slide" data-section="Juhtimismudel" hidden>
+<div class="inner">
+  <h2>Juhtimismudel ühe pildina</h2>
+  <div class="gov">
+    <div class="m"><div class="role2">Poliitika</div><h3>Kliimaministeerium</h3><p>Eesmärgid, mandaat, baasrahastus</p></div>
+    <div class="empty"></div><div class="empty"></div>
+    <div class="m own"><div class="role2">Omand</div><h3>Maa- ja Ruumiamet</h3><p>Programmi- ja teenuseomanik, ÜBN 4 tooteomanik</p></div>
+    <div class="link"></div>
+    <div class="s"><div class="role2">Nõu</div><h3>Digitaalehituse juhtgrupp</h3><p>Tasakaalustab huve, annab arvamuse</p></div>
+    <div class="m"><div class="role2">Teostus</div><h3>Haldur</h3><p>Repositoorium, muudatused, väljalasked, tugi</p></div>
+    <div class="link"></div>
+    <div class="s"><div class="role2">Ekspertiis</div><h3>Tehniline nõukogu ja töörühmad</h3><p>Hindavad ja testivad muudatusi</p></div>
+    <div class="m last"><div class="role2">Rakendus</div><h3>Tellijad, KOVid ja turuosalised</h3><p>Kasutavad ÜBN 4-d organisatsioonis ja projektides</p></div>
+    <div class="empty"></div>
+    <div class="fb">Tagasiside ja parim praktika liiguvad ülespoole ühisosasse</div>
+  </div>
+  <div class="govlegend"><span><i></i>mandaat ja vastutus</span><span><i class="d"></i>nõu ja soovitus</span></div>
+</div>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-section="Juhtimismudel" hidden>
+<div class="inner">
+  <h2>Kes mida teeb</h2>
+  <div class="roles">
+    <div class="role"><div class="lab">Poliitika</div><h3>Kliimaministeerium</h3><p>Seab eesmärgid, annab mandaadi, tagab baasrahastuse ja teeb strateegilised otsused.</p></div>
+    <div class="role key"><div class="lab">Omand</div><h3>Maa- ja Ruumiamet</h3><p>Programmi- ja teenuseomanik. Nimetab ÜBN 4 tooteomaniku, juhib teekaarti ja eelarvet, valib halduri, võtab väljalasked vastu.</p></div>
+    <div class="role"><div class="lab">Nõu</div><h3>Digitaalehituse juhtgrupp</h3><p>Sektoriülene nõukoda. Tasakaalustab huve ja annab arvamuse, kuid ei asenda omanikku.</p></div>
+    <div class="role"><div class="lab">Teostus</div><h3>Haldur</h3><p>Hoiab repositooriumi ja muudatuste registrit, valmistab ette väljalasked, korraldab tuge ja kogukonda.</p></div>
+    <div class="role"><div class="lab">Ekspertiis</div><h3>Tehniline nõukogu ja töörühmad</h3><p>Hindavad muudatuste kvaliteeti ja rakendatavust, töötavad välja ja testivad lahendusi.</p></div>
+    <div class="role"><div class="lab">Rakendus</div><h3>Avaliku sektori tellijad ja piloodid</h3><p>Seovad ÜBN 4 oma varade ja süsteemidega ning toovad praktika tagasi ühisosasse.</p></div>
+  </div>
+  <p class="small" style="margin-top:1rem">Igal otsusel on üks lõplik vastutaja. Juhtgrupi statuut määrab koosseisu, kvoorumi, eriarvamused ja huvide deklareerimise.</p>
+</div>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-section="Juhtimismudel" hidden>
+<div class="inner">
+  <h2>Haldur korraldab, aga ei otsusta</h2>
+  <div class="cols split">
+    <div>
+      <p class="big">Omand ja teostus on lahus. Haldur valitakse läbipaistvalt ja on vajadusel vahetatav.</p>
+      <p class="muted" style="margin-top:1rem">Digitaalehituse klaster võib olemasoleva kompetentsi ja võrgustikuga olla üks võimalik haldur. Roll peab aga tulenema selgest volitusest või lepingust.</p>
+    </div>
+    <ul class="plain">
+      <li>Tegutseb volituse või lepingu alusel, mõõdetavate väljunditega</li>
+      <li>Ei kinnita enda koostatud muudatusi ega oma töö vastuvõttu</li>
+      <li>Ei saa ainuõigust ÜBN 4-l põhinevale koolitusele ega sertifitseerimisele</li>
+      <li>Avalik ülesanne ja kommertsteenused on kulude arvestuses lahus</li>
+      <li>Riigil säilib ligipääs kogu repositooriumile, andmetele ja testidele</li>
+      <li>Lepingu lõppedes antakse kõik üle ilma teenuse katkemiseta</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- 15 -->
+<section class="slide" data-section="Rahastus" hidden>
+<div class="inner">
+  <h2>Põhiteenus ei tohi sõltuda projektist</h2>
+  <div class="cols c3">
+    <div class="rule a"><h3>Riiklik baasrahastus</h3><p>Püsiv juhtimine, haldus, kvaliteedi tagamine, repositoorium, kasutajatugi ja mõju seire.</p></div>
+    <div class="rule"><h3>Arendus ja piloodid</h3><p>Tähtajalised uued võimekused, integratsioonid ja valideerimine.</p></div>
+    <div class="rule"><h3>Kaasrahastus</h3><p>Organisatsiooni või sektori erilahendused. Rahaline panus ei anna otsustusõigust põhisisu üle.</p></div>
+  </div>
+  <div class="ladder" aria-label="Ressursistsenaariumid">
+    <div><h3>Minimaalne</h3><p>Maa- ja Ruumiameti tooteomanik, stabiilne versioon, kriitilised parandused</p><div class="w">Ainult ajutiseks</div></div>
+    <div><span class="rec">Soovitatav</span><h3>Baas</h3><p>Püsiv omaniku- ja haldurivõimekus, väljalasked, piloodid, tugi ja mõõtmine</p><div class="w">Lähtevariant eelarvele</div></div>
+    <div><h3>Laiendatud</h3><p>Lisaks juurutusprogramm, masinkontrollid ja riiklikud integratsioonid</p><div class="w">Pärast baasi tõendamist</div></div>
+  </div>
+  <p class="small" style="margin-top:1rem">ÜBN 4 põhisisu on tasuta ja avalik. Koolitus, nõustamine ja organisatsioonipõhine juurutustugi võivad toimida turutingimustel.</p>
+</div>
+</section>
+
+<!-- 16 -->
+<section class="slide" data-section="Rahvusvaheline kogemus" hidden>
+<div class="inner">
+  <h2>Naabritel on püsiv eestvedaja</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Riik</th><th>Keskne organisatsioon</th><th>Raamistik</th><th>Rahastus</th></tr></thead>
+      <tbody>
+        <tr><td>Norra</td><td>buildingSMART Norge</td><td>POFIN</td><td>Liikmetasud ja partnerlus</td></tr>
+        <tr><td>Soome</td><td>buildingSMART Finland</td><td>RYTV tellijajuhend</td><td>Liikmetasud suuruse järgi</td></tr>
+        <tr><td>Rootsi</td><td>BIM Alliance Sweden</td><td>PRAXI</td><td>Baastasu ja käibepõhine tasu</td></tr>
+        <tr><td>Taani</td><td>Molio</td><td>IKT nõuded</td><td>Juhendid, koolitused, tarkvara</td></tr>
+        <tr><td>UK</td><td>nima</td><td>IMI Framework</td><td>Patroonid ja vabatahtlikud</td></tr>
+        <tr><td>Leedu</td><td>Skaitmeninė statyba (SKST)</td><td>Riiklik klassifikaator ja BIM-nõuded</td><td>Liidud ja teenused</td></tr>
+        <tr class="ee"><td><b>Eesti</b></td><td>Digitaalehituse klaster (MTÜ)</td><td>ÜBN 4</td><td>Projektipõhine, buildingSMARTi liikmeta</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:1.2rem">Õpime Nordic BIM Hubi, openBIM Harmony ja nima kogemusest, kuid kohandame selle Eesti vajaduste ja võimekusega.</p>
+</div>
+</section>
+
+<!-- 17 -->
+<section class="slide" data-section="Rakendamine" hidden>
+<div class="inner">
+  <h2>Teekaart</h2>
+  <div class="road">
+    <div>
+      <div class="when">90 päeva</div>
+      <ul>
+        <li>Rollid, mandaat ja nimeline tooteomanik Maa- ja Ruumiametis</li>
+        <li>Juhtgrupi statuut ja huvide konflikti kord</li>
+        <li>Halduri valiku põhimõtted</li>
+        <li>Muudatuste ja väljalasete protsess</li>
+        <li>Vähemalt kolme piloodi harta</li>
+      </ul>
+    </div>
+    <div>
+      <div class="when">12 kuud</div>
+      <ul>
+        <li>Avalik repositoorium, register ja väljalaskekalender</li>
+        <li>Esimene täielik muudatus- ja väljalasketsükkel</li>
+        <li>Rakenduspakett avaliku sektori tellijatele</li>
+        <li>Targa tellija koolitusprogramm</li>
+        <li>Esimene avalik juhtimis- ja mõjuaruanne</li>
+      </ul>
+    </div>
+    <div>
+      <div class="when">24–36 kuud</div>
+      <ul>
+        <li>Pilootidega valideeritud stabiilne ÜBN 4.x</li>
+        <li>Masinloetavad nõuded ja automaatkontrollid</li>
+        <li>Ühildumine riiklike digiteenustega</li>
+        <li>ÜBN 4 kõrg-, kutse- ja täiendusõppes</li>
+        <li>Otsus hangetes kasutamise laiendamise kohta</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 18 -->
+<section class="slide" data-section="Rakendamine" hidden>
+<div class="inner">
+  <h2>Kohustuslikuks alles siis, kui turg on valmis</h2>
+  <ul class="checks">
+    <li>Olemas on ametlik stabiilne versioon ja avalik muudatuste ajalugu</li>
+    <li>Esinduslikud piloodid on tõendanud rakendatavust ja proportsionaalsust</li>
+    <li>Juhendid, mallid, kontrollivahendid ja kasutajatugi on kättesaadavad</li>
+    <li>Õigus- ja hankekeskkonna mõju ning erandid on analüüsitud</li>
+    <li>Tarkvaratootjad ja turuosalised on saanud piisava etteteatamisaja</li>
+    <li>Nõuete mahtu saab kohandada projekti riskile ja võimekusele</li>
+    <li>Olemas on mudel kasu, kulu ja kõrvalmõjude hindamiseks</li>
+  </ul>
+</div>
+</section>
+
+<!-- 19 -->
+<section class="slide" data-section="Väärtus osapooltele" hidden>
+<div class="inner">
+  <h2>Mida see sulle annab</h2>
+  <div class="value">
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12L16 5l12 7z"/><path d="M7 13v11M12.5 13v11M19.5 13v11M25 13v11"/><path class="a" d="M4 27h24"/></svg><h3>Poliitikakujundaja</h3><p>Selgem seos eesmärkide, regulatsioonide, investeeringute ja digilahenduste vahel.</p></div>
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l8-3 10 3 8-3v19l-8 3-10-3-8 3z"/><path d="M11 5v19M21 8v19"/><circle class="a" cx="16" cy="14" r="2.5"/></svg><h3>Maa- ja Ruumiamet</h3><p>Üks hallatav raamistik nõuete, alusandmete ja digiteenuste arendamiseks.</p></div>
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h11l6 6v20H8z"/><path d="M19 3v6h6"/><path class="a" d="M12 19l3 3 6-7"/></svg><h3>Avaliku sektori tellija</h3><p>Taaskasutatavad praktikad, selgemad hanked, võrreldavad tulemid.</p></div>
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 28V14l7-5 7 5v14"/><path d="M18 28V10l5-4 5 4v18"/><path class="a" d="M9 28v-6h4v6"/></svg><h3>Kohalik omavalitsus</h3><p>Lihtsad baasnõuded ja mallid, mis arvestavad piiratud võimekusega.</p></div>
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L27 27M22 22l3-3M25 25l2-2"/><circle class="a" cx="11" cy="11" r="2"/></svg><h3>Varahaldur</h3><p>Vajalik teave on määratud varakult ja jõuab haldussüsteemi õigel kujul.</p></div>
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 27V5l22 22z"/><path d="M10 22v-6l6 6z"/><path class="a" d="M5 10h3M5 15h3M5 20h3"/></svg><h3>Projekteerija ja ehitaja</h3><p>Stabiilsemad nõuded ja selgemad vastuvõtukriteeriumid, vähem tellijate erisusi.</p></div>
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="26" height="20" rx="2"/><path class="a" d="M12 12l-4 3 4 3M20 12l4 3-4 3M17 10l-2 10"/></svg><h3>Tarkvaratootja</h3><p>Avalikud andmemudelid ja etteaimatav väljalaskekalender integratsioonideks.</p></div>
+    <div><svg class="ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l13-6 13 6-13 6z"/><path d="M8 15v6c3 3 13 3 16 0v-6"/><path class="a" d="M29 12v8"/></svg><h3>Liidud ja kõrgkoolid</h3><p>Püsiv kanal vajaduste koondamiseks ja kompetentside arendamiseks.</p></div>
+  </div>
+  <div class="note"><p>Keegi ei pea ehitama kogu infohalduse raamistikku üksi. Riik hoiab ühisosa, organisatsioon lisab oma vajadused, projekt täpsustab teostuse.</p></div>
+</div>
+</section>
+
+<!-- 20 -->
+<section class="slide" data-section="Mõõdikud" hidden>
+<div class="inner">
+  <h2>Mõõdame mõju, mitte aktiivsust</h2>
+  <div class="logic" aria-label="Mõjuloogika">
+    <div><b>Tegevus</b>kohtumised, koolitused</div>
+    <div><b>Väljund</b>väljalase, juhend, mall</div>
+    <div><b>Tulemus</b>tellijad rakendavad</div>
+    <div><b>Mõju</b>andmed kasutuses, vähem käsitööd</div>
+  </div>
+  <div class="metrics">
+    <div><h3>Juhtimine</h3><ul><li>Tegevused, millel on vastutaja, tähtaeg ja rahastus</li><li>Avaldatud otsused ja huvide deklaratsioonid</li></ul></div>
+    <div><h3>Muudatusprotsess</h3><ul><li>Ettepaneku menetlemise mediaanaeg</li><li>Väljalasete tähtaegsus</li></ul></div>
+    <div><h3>Kasutuselevõtt</h3><ul><li>ÜBN 4 rakendavad tellijad ja KOVid</li><li>Hanked, mis viitavad stabiilsele versioonile</li></ul></div>
+    <div><h3>Andmekvaliteet ja mõju</h3><ul><li>Esimesel kontrollil läbinud infovahetused</li><li>Ilma käsitsi sisestamiseta haldusse jõudnud andmed</li><li>Pilootides mõõdetud aja- ja veamuutus</li></ul></div>
+  </div>
+  <p class="small" style="margin-top:1.4rem">Igal mõõdikul on valem, lähteväärtus, siht, andmeallikas ja omanik. Sihid seatakse pärast lähteolukorra mõõtmist.</p>
+</div>
+</section>
+
+<!-- 21 -->
+<section class="slide" data-section="Konsultatsioon" hidden>
+<div class="inner">
+  <h2>Sinu tagasiside kujundab mudelit</h2>
+  <div class="cols split" style="--l:1.5fr">
+    <div>
+      <p><b>Arutame koos</b></p>
+      <ol class="qs">
+        <li>Kas rollide jaotus ministeeriumi, ameti, juhtgrupi ja halduri vahel on selge ja õiglane?</li>
+        <li>Millised kasutusjuhud ja piloodid tooksid sinu organisatsioonile esimesena väärtust?</li>
+        <li>Kas baasstsenaarium on õige lähtevariant? Kuidas saaks sinu organisatsioon panustada?</li>
+        <li>Kuidas hoida nõuded proportsionaalsed väikestele tellijatele ja projektidele?</li>
+        <li>Millistel tingimustel oleks ÜBN 4 laiem nõudmine hangetes mõistlik?</li>
+      </ol>
+      <div class="note" style="margin-top:1rem"><p>Tegu on idee ja arutelu lähtekohaga. Lõplikud otsused teevad pärast konsultatsiooni Kliimaministeerium ning Maa- ja Ruumiamet.</p></div>
+    </div>
+    <div class="links">
+      <a href="https://docs.google.com/document/d/1orNCPla3ZzSlC6FPkWqGnTRrP5Rq89kU/edit?usp=drivesdk&amp;ouid=116341425584942830595&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">ÜBN 4 seletuskiri<small>Raamistiku üldpõhimõtted ja lisad</small></a>
+      <a href="https://digipark.notion.site/ybn" target="_blank" rel="noopener">ÜBN 4 wiki<small>Rakendusjuhised (digi-)targale tellijale</small></a>
+      <a href="https://docs.google.com/document/d/1gVh_Jqij_LpJyWlLBDktw-Ol05Fc3-QdOzi3NTLvnwM/edit?usp=drivesdk" target="_blank" rel="noopener">Eelanalüüs ja kavand<small>Suvi 2026</small></a>
+      <a href="https://docs.google.com/document/d/1pOjxpDzYRnigkfGkcy4T2a56i32dlZTy-oFnMOUfIaM/edit?usp=drivesdk" target="_blank" rel="noopener">Juhtimismudel 2027+<small>Kavand, 2027 algus</small></a>
+      <div class="contact" style="margin-top:.6rem;flex-direction:column;align-items:flex-start;gap:.3rem">
+        <span class="org">Digitaalehituse klaster</span>
+        <a href="https://www.digitaalehitus.ee" target="_blank" rel="noopener">www.digitaalehitus.ee</a>
+        <span>Hendrik Park, juhatuse liige</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer class="bottom">
+  <div class="dots" id="dots"><div class="fillbar" id="fillbar"></div></div>
+  <div class="counter" id="counter" aria-live="off"></div>
+  <div class="nav">
+    <button type="button" id="prev" aria-label="Eelmine slaid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button type="button" id="next" aria-label="Järgmine slaid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N = slides.length, i = 0;
+  var dotsEl = document.getElementById('dots'), fill = document.getElementById('fillbar');
+  var counter = document.getElementById('counter'), sectionEl = document.getElementById('section');
+  var prev = document.getElementById('prev'), next = document.getElementById('next');
+  var dots = [];
+
+  slides.forEach(function(s, k){
+    s.setAttribute('role','group');
+    s.setAttribute('aria-roledescription','slaid');
+    s.setAttribute('aria-label', (k+1) + ' / ' + N);
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'dot';
+    b.setAttribute('aria-label','Mine slaidile ' + (k+1));
+    b.addEventListener('click', function(){ go(k); });
+    dotsEl.appendChild(b); dots.push(b);
+  });
+
+  function updateFill(){
+    if (N < 2) return;
+    var first = dots[0].getBoundingClientRect(), cur = dots[i].getBoundingClientRect(), base = dotsEl.getBoundingClientRect();
+    fill.style.width = Math.max(0, (cur.left + cur.width/2) - (first.left + first.width/2)) + 'px';
+    fill.style.left = ((first.left + first.width/2) - base.left) + 'px';
+  }
+
+  function go(k){
+    k = Math.max(0, Math.min(N-1, k));
+    slides[i].hidden = true; slides[i].classList.remove('on');
+    i = k;
+    var s = slides[i];
+    s.hidden = false; s.scrollTop = 0;
+    void s.offsetWidth;
+    s.classList.add('on');
+    dots.forEach(function(d, j){
+      d.classList.toggle('done', j < i);
+      if (j === i) d.setAttribute('aria-current','step'); else d.removeAttribute('aria-current');
+    });
+    updateFill();
+    counter.textContent = (i+1) + ' / ' + N;
+    sectionEl.textContent = ' / ' + (s.getAttribute('data-section') || '');
+    prev.disabled = i === 0; next.disabled = i === N-1;
+    try { history.replaceState(null, '', '#' + (i+1)); } catch(e) {}
+  }
+
+  prev.addEventListener('click', function(){ go(i-1); });
+  next.addEventListener('click', function(){ go(i+1); });
+
+  document.addEventListener('keydown', function(e){
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    var t = e.target && e.target.tagName;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); go(i+1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(i-1); }
+    else if (e.key === ' ' && t !== 'BUTTON' && t !== 'A') { e.preventDefault(); go(e.shiftKey ? i-1 : i+1); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(N-1); }
+  });
+
+  var sx = 0, sy = 0, tracking = false;
+  var deck = document.getElementById('deck');
+  deck.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) return;
+    tracking = true; sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, {passive:true});
+  deck.addEventListener('touchend', function(e){
+    if (!tracking) return; tracking = false;
+    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (e.target.closest && e.target.closest('.tablewrap')) return;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? i+1 : i-1);
+  }, {passive:true});
+
+  window.addEventListener('resize', updateFill);
+  window.addEventListener('hashchange', function(){
+    var n = parseInt(location.hash.slice(1), 10);
+    if (n && n-1 !== i) go(n-1);
+  });
+
+  var root = document.documentElement, tb = document.getElementById('theme');
+  function curTheme(){ var t = root.getAttribute('data-theme'); if (t) return t; return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+  function paintTheme(){ var d = curTheme() === 'dark'; tb.setAttribute('aria-pressed', d ? 'true' : 'false');
+    tb.setAttribute('aria-label', d ? 'Lülita heledale taustale' : 'Lülita tumedale taustale');
+    tb.querySelector('.lbl').textContent = d ? 'Hele' : 'Tume'; }
+  tb.addEventListener('click', function(){ var n = curTheme() === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', n);
+    try { localStorage.setItem('ubn4-theme', n); } catch(e) {} paintTheme(); });
+  paintTheme();
+
+  var start = parseInt((location.hash || '').slice(1), 10);
+  go(start && start >= 1 && start <= N ? start-1 : 0);
+})();
+</script>
+</body>
+</html>
